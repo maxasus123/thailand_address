@@ -1,3 +1,5 @@
 name = Thailand Address
 description = Plugin Jquery Thailand Address.
 core = 7.x
+dependencies[] = libraries
+dependencies[] = jquery_update
