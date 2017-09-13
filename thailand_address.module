@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Examples showing how to use some of the new JavaScript features in Drupal 7.
+ */
+
+/**
+ * Implements hook_libraries_info().
+ *
+ * For defining external libraries.
+ */
+function thailand_address_libraries_info() {
+
+  // A very simple library. No changing APIs (hence, no versions), no variants.
+  // Expected to be extracted into 'sites/all/libraries/simple'.
+  $libraries['thailand_address'] = array(
+    'name' => 'jquery.Thailand.js',
+    'vendor url' => 'https://github.com/earthchie/jquery.Thailand.js',
+    'download url' => 'https://github.com/earthchie/jquery.Thailand.js/archive/master.zip',
+    'version callback' => 'thailand_address_version_callback',
+    'files' => array(
+      'js' => array('jquery.Thailand.js/jquery.Thailand.js/src/jquery.Thailand.js'), //this can be a path to the file location like array('lib/simple.js')
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * 
+ * This callback libraries version.
+ */
+function thailand_address_version_callback() {
+  return TRUE;
+}
