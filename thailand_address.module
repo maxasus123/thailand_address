@@ -30,3 +30,42 @@ function thailand_address_libraries_info() {
 
   return $libraries;
 }
+
+/**
+ * Implements hook_form_alter().
+ *
+ * This config  Disabled/ Enabled module 'Thailand address'. 
+ * 
+ */
+function thailand_address_form_alter(&$form, $form_state, $form_id) {
+  // First, check for the node type configuration form.
+  if ($form_id == 'node_type_form') {
+    $form['thailand_address'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Thailand Address settings'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#group' => 'additional_settings',
+      '#weight' => -1,
+    );
+
+    $form['thailand_address']['thailand_address_node_type'] = array(
+      '#type' => 'radios',
+      '#title' => t('Thailand Address Use:'),
+      '#default_value' => variable_get('thailand_address_node_type_' . $form['#node_type']->type, FALSE),
+      '#options' => array(
+        FALSE => t('Disabled'),
+        TRUE => t('Enabled'),
+      ),
+      '#description' => t('Should this node have a Thailand Address Module.'),
+    );
+  }
+  // Here we check to see if the type and node field are set. If so, it could
+  elseif (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] . '_node_form' == $form_id) {
+    // into the form.
+    $node = $form['#node'];
+    if (variable_get('thailand_address_node_type_' . $form['type']['#value'], FALSE)) {
+
+    }
+  }
+}
